@@ -1,0 +1,14 @@
+<mat-toolbar>
+  <div class="container">
+    <div class="d-flex justify-content-between w-100">
+      <span>Sai Clinic</span>
+      <button mat-raised-button color="primary" (click)="addPatient()">
+        <mat-icon>add</mat-icon> Add
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="container mt-3">
+  <app-patient-list [patientData]="patientList"></app-patient-list>
+</div>

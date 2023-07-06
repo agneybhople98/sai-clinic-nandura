@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let patient of patientData" class="col-md-4 md-mt-0 mt-3">
+      <mat-card class="example-card">
+        <div
+          class="patient-header d-flex align-items-start justify-content-between"
+        >
+          <div class="d-flex align-items-center mb-4">
+            <img
+              class="patient-image"
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <mat-card-header>
+              <mat-card-title class="m-0">{{ patient.name }}</mat-card-title>
+              <mat-card-subtitle class="m-0">{{
+                patient.description
+              }}</mat-card-subtitle>
+            </mat-card-header>
+          </div>
+          <button
+            [matMenuTriggerFor]="menu"
+            mat-icon-button
+            aria-label="Example icon button with a vertical three dot icon"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="(null)">
+              <mat-icon class="me-1">edit</mat-icon>
+              Edit
+            </button>
+            <button mat-menu-item (click)="deletePatient(patient)">
+              <mat-icon class="text-danger me-1">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+        </div>
+
+        <mat-card-content>
+          <p>This card indeterminates progress bar.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
