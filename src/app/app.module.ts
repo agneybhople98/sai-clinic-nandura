@@ -5,24 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatCardModule } from '@angular/material/card';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatChipsModule } from '@angular/material/chips';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PatientListComponent } from './patient-list/patient-list.component';
-import { MatMenuModule } from '@angular/material/menu';
 import { DeletePatientComponent } from './components/delete-patient/delete-patient.component';
+import { MaterialModule } from './material.module';
+import { PatientViewComponent } from './components/patient-view/patient-view.component';
 
 @NgModule({
   declarations: [
@@ -31,26 +21,17 @@ import { DeletePatientComponent } from './components/delete-patient/delete-patie
     AddPatientComponent,
     PatientListComponent,
     DeletePatientComponent,
+    PatientViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatCheckboxModule,
     FormsModule,
-    MatRadioModule,
-    MatAutocompleteModule,
-    MatChipsModule,
     MatDatepickerModule,
+    ReactiveFormsModule,
     MatNativeDateModule,
-    MatMenuModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

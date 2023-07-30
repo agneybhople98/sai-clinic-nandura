@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DeletePatientComponent } from '../components/delete-patient/delete-patient.component';
+import { PatientViewComponent } from '../components/patient-view/patient-view.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -18,11 +19,21 @@ export class PatientListComponent implements OnInit {
       this.patientData
     );
   }
-  deletePatient(patientData: any) {
+  viewPatient(): void {
+    this.dialog.open(PatientViewComponent);
+  }
+  deletePatient(patient: any) {
     console.log(
       '🚀 ~ file: patient-list.component.ts:22 ~ PatientListComponent ~ deletePatient ~ patientData:',
-      patientData
+      patient.id
     );
-    this.dialog.open(DeletePatientComponent);
+    const dataObject = {
+      patientData: this.patientData,
+      patientId: patient.id,
+    };
+    this.dialog.open(DeletePatientComponent, {
+      disableClose: true,
+      data: dataObject,
+    });
   }
 }

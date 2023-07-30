@@ -1,126 +1,178 @@
 <h2 mat-dialog-title>Add Patient</h2>
-<div mat-dialog-content>
-  <div class="row align-items-center mb-3">
-    <div class="col-md-3">
-      <img
-        class="profile-picture"
-        src="../../../assets/dummy-profile.png"
-        alt="image"
-      />
-    </div>
-    <div class="col-md-9">
-      <button mat-stroked-button>
-        <mat-icon>upload_outline</mat-icon>
-        Upload
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Name</mat-label>
-        <input #input matInput placeholder="Name" />
-      </mat-form-field>
-    </div>
-    <div class="col-md">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Surname</mat-label>
-        <input #input matInput placeholder="Surname" />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Address</mat-label>
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="5"
-        ></textarea>
-      </mat-form-field>
-    </div>
-    <div class="col-md">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Patient Component </mat-label>
-        <input #input matInput placeholder="Patient Component" />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row align-items-center">
-    <div class="col-md-6 mb-3 mt-1">
-      <section class="example-section">
-        <label class="mb-1">Gender :</label>
-        <mat-radio-group class="ms-2">
-          <mat-radio-button class="example-margin" value="after"
-            >Male</mat-radio-button
-          >
-          <mat-radio-button class="ms-2" value="before"
-            >Female</mat-radio-button
-          >
-        </mat-radio-group>
-      </section>
-    </div>
-    <div class="col-md-6">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Surname</mat-label>
-        <input #input matInput placeholder="Placeholder" />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row mt-1">
-    <div class="col-md-12">
-      <mat-form-field class="example-chip-list w-100" appearance="outline">
-        <mat-label>Patient Allergies</mat-label>
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip
-            color="primary"
-            *ngFor="let fruit of fruits"
-            (removed)="remove(fruit)"
-          >
-            {{ fruit }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
+<form action="" [formGroup]="addPatient">
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" #input matInput placeholder="Name" />
+        </mat-form-field>
+      </div>
+      <div class="col-md">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Surname</mat-label>
           <input
-            placeholder="Allergie"
-            #fruitInput
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"
+            formControlName="surname"
+            #input
+            matInput
+            placeholder="Surname"
           />
-        </mat-chip-list>
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          (optionSelected)="selected($event)"
-        >
-          <mat-option
-            *ngFor="let fruit of filteredFruits | async"
-            [value]="fruit"
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Address</mat-label>
+          <textarea
+            formControlName="address"
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="5"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-md">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Patient Component </mat-label>
+          <input
+            formControlName="patientComponent"
+            #input
+            matInput
+            placeholder="Patient Component"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-3 mt-1">
+        <section class="example-section d-flex">
+          <label class="mb-2 me-1">Gender : </label>
+          <mat-radio-group class="d-flex" formControlName="gender">
+            <mat-radio-button class="example-margin" value="Male"
+              >Male</mat-radio-button
+            >
+            <mat-radio-button class="ms-2" value="Female"
+              >Female</mat-radio-button
+            >
+          </mat-radio-group>
+        </section>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div formGroupName="patientAllergies" class="col-md-12">
+        <mat-form-field class="example-chip-list w-100" appearance="outline">
+          <mat-label>Patient Allergies</mat-label>
+          <mat-chip-list
+            #chipList
+            formControlName="allergies"
+            aria-label="Allergie selection"
           >
-            {{ fruit }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+            <mat-chip
+              color="primary"
+              *ngFor="let allergie of allergieControl.controls; let i = index"
+              (removed)="remove(i)"
+            >
+              {{ allergie.value }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              [formControl]="allergieCtrl"
+              placeholder="Allergie"
+              #allergieInput
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option
+              *ngFor="let allergie of filteredAllergies | async"
+              [value]="allergie"
+            >
+              {{ allergie }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- <div class="row mt-1">
+      <div formGroupName="patientComplains" class="col-md-12">
+        <mat-form-field class="example-chip-list w-100" appearance="outline">
+          <mat-label>Patient Complains</mat-label>
+          <mat-chip-list
+            #chipList
+            formControlName="complains"
+            aria-label="Complain selection"
+          >
+            <mat-chip
+              color="primary"
+              *ngFor="let complain of complainControl.controls; let i = index"
+              (removed)="removeComplain(i)"
+            >
+              {{ complain.value }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              [formControl]="complainCtrl"
+              placeholder="Complains"
+              #complainInput
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              (matChipInputTokenEnd)="addComplain($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selectedComplain($event)"
+          >
+            <mat-option
+              *ngFor="let complain of filteredComplains | async"
+              [value]="complain"
+            >
+              {{ complain }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Revisit Date</mat-label>
+          <input
+            formControlName="datePicker"
+            matInput
+            [matDatepicker]="picker"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Revisit Date</mat-label>
-        <input matInput [matDatepicker]="picker" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
+  <div class="d-flex justify-content-end" mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!this.addPatient.valid"
+      (click)="savePatient()"
+    >
+      Save
+    </button>
   </div>
-</div>
-<div class="d-flex justify-content-end" mat-dialog-actions>
-  <button mat-button>Cancel</button>
-  <button mat-raised-button color="primary">Save</button>
-</div>
+</form>

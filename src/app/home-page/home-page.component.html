@@ -1,14 +1,22 @@
 <mat-toolbar>
   <div class="container">
     <div class="d-flex justify-content-between w-100">
-      <span>Sai Clinic</span>
-      <button mat-raised-button color="primary" (click)="addPatient()">
-        <mat-icon>add</mat-icon> Add
-      </button>
+      <span class="fw-500">Sai Clinic</span>
+      <div class="d-flex align-items-center">
+        <mat-slide-toggle class="me-4" [formControl]="toggleControl">
+        </mat-slide-toggle>
+
+        <button mat-raised-button color="primary" (click)="addPatient()">
+          <mat-icon>add</mat-icon> Add
+        </button>
+      </div>
     </div>
   </div>
 </mat-toolbar>
 
-<div class="container mt-3">
+<div
+  class="container-fluid h-100 pt-4 pb-4"
+  [ngClass]="containerClass ? 'darkBackground' : ''"
+>
   <app-patient-list [patientData]="patientList"></app-patient-list>
 </div>
