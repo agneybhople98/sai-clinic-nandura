@@ -16,38 +16,7 @@ export class HomePageComponent implements OnInit {
   public containerClass: any;
   @HostBinding('class') className = '';
 
-  public patientList = [
-    {
-      id: 1,
-      name: 'Agney 1',
-      description: 'Nothing 1',
-    },
-    {
-      id: 2,
-      name: 'Agney 2',
-      description: 'Nothing 2',
-    },
-    {
-      id: 3,
-      name: 'Agney 3',
-      description: 'Nothing 3',
-    },
-    {
-      id: 4,
-      name: 'Agney 4',
-      description: 'Nothing 4',
-    },
-    {
-      id: 5,
-      name: 'Agney 5',
-      description: 'Nothing 5',
-    },
-    {
-      id: 6,
-      name: 'Agney 6',
-      description: 'Nothing 6',
-    },
-  ];
+  public patientList = [];
 
   ngOnInit(): void {
     this.initializeDarkMode();

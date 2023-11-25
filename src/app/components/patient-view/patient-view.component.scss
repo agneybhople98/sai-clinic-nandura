@@ -1,0 +1,18 @@
+.patient {
+  &-info {
+    border-bottom: 0.5px solid #303030;
+    padding: 1rem;
+  }
+  &-id,
+  &-name,
+  &-age,
+  &-gender {
+    font-size: 1rem;
+  }
+}
+
+.vertical-border {
+  height: 1rem;
+  border-right: 1px solid white;
+  margin: 0px 10px;
+}

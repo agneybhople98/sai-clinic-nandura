@@ -13,6 +13,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { DeletePatientComponent } from './components/delete-patient/delete-patient.component';
 import { MaterialModule } from './material.module';
 import { PatientViewComponent } from './components/patient-view/patient-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PatientViewComponent } from './components/patient-view/patient-view.com
     ReactiveFormsModule,
     MatNativeDateModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

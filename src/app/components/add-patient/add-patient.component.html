@@ -21,6 +21,31 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Pulse</mat-label>
+          <input
+            formControlName="pulse"
+            #input
+            matInput
+            placeholder="120/70 mmHg "
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Weight </mat-label>
+          <input
+            formControlName="weight"
+            #input
+            matInput
+            placeholder="78 kg"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md">
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>Address</mat-label>
@@ -60,9 +85,21 @@
           </mat-radio-group>
         </section>
       </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Patient Age</mat-label>
+          <input
+            formControlName="age"
+            #input
+            type="number"
+            matInput
+            placeholder="Patient Age"
+          />
+        </mat-form-field>
+      </div>
     </div>
     <div class="row mt-1">
-      <div formGroupName="patientAllergies" class="col-md-12">
+      <!-- <div formGroupName="patientAllergies" class="col-md-12">
         <mat-form-field class="example-chip-list w-100" appearance="outline">
           <mat-label>Patient Allergies</mat-label>
           <mat-chip-list
@@ -101,15 +138,14 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-      </div>
-    </div>
-    <!-- <div class="row mt-1">
+      </div> -->
+
       <div formGroupName="patientComplains" class="col-md-12">
         <mat-form-field class="example-chip-list w-100" appearance="outline">
           <mat-label>Patient Complains</mat-label>
           <mat-chip-list
             #chipList
-            formControlName="complains"
+            formArrayName="complains"
             aria-label="Complain selection"
           >
             <mat-chip
@@ -144,7 +180,8 @@
           </mat-autocomplete>
         </mat-form-field>
       </div>
-    </div> -->
+    </div>
+
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="w-100" appearance="outline">
@@ -161,6 +198,101 @@
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+      </div>
+    </div>
+    <div class="prescription row mt-2">
+      <div class="col-md-12">
+        <div
+          class="prescription-add d-flex justify-content-between align-items-center"
+        >
+          <div class="prescription-title">
+            Prescription ({{
+              this.prescriptionListForm.get("prescriptions").controls.length
+            }})
+          </div>
+          <button
+            matTooltip="Add more"
+            mat-icon-button
+            aria-label="Icon button to add patient"
+            (click)="addPrescriptionFormGroup()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <form [formGroup]="prescriptionListForm">
+          <div class="prescription-list" formArrayName="prescriptions">
+            <div
+              *ngFor="
+                let pres of prescriptionListForm.get('prescriptions').controls;
+                let i = index
+              "
+              [formGroupName]="i"
+            >
+              <div
+                [ngClass]="{
+                  'prescription-divider':
+                    this.prescriptionListForm.get('prescriptions').controls
+                      .length > 1
+                }"
+              >
+                <div class="row">
+                  <div class="col-md-9">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Medicine Name</mat-label>
+                      <input
+                        formControlName="medicine"
+                        #input
+                        matInput
+                        placeholder="Medicine Name"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Days</mat-label>
+                      <input
+                        formControlName="days"
+                        #input
+                        matInput
+                        placeholder="Days"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-button-toggle-group
+                      name="timings"
+                      aria-label="Timings"
+                      multiple
+                      formControlName="timings"
+                      class="mt-1"
+                    >
+                      <mat-button-toggle value="breakfast"
+                        >Breakfast</mat-button-toggle
+                      >
+                      <mat-button-toggle value="lunch">Lunch</mat-button-toggle>
+                      <mat-button-toggle value="dinner"
+                        >Dinner</mat-button-toggle
+                      >
+                    </mat-button-toggle-group>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Dosage</mat-label>
+                      <input
+                        formControlName="dosage"
+                        #input
+                        matInput
+                        placeholder="Dosage"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

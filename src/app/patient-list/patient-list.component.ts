@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DeletePatientComponent } from '../components/delete-patient/delete-patient.component';
 import { PatientViewComponent } from '../components/patient-view/patient-view.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PatientService } from '../patient.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -11,16 +12,25 @@ import { MatDialog } from '@angular/material/dialog';
 export class PatientListComponent implements OnInit {
   @Input() patientData: any;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private _patientService: PatientService
+  ) {}
 
   ngOnInit(): void {
-    console.log(
-      '🚀 ~ file: patient-list.component.ts:15 ~ PatientListComponent ~ ngOnInit ~ this.patientData:',
-      this.patientData
-    );
+    this._patientService.getAllPatients().subscribe((res) => {
+      this.patientData = res;
+
+      console.log(
+        '🚀 ~ file: patient-list.component.ts:26 ~ PatientListComponent ~ this._patientService.getAllPatients ~ res:',
+        res
+      );
+    });
   }
-  viewPatient(): void {
-    this.dialog.open(PatientViewComponent);
+  viewPatient(patient: any): void {
+    this.dialog.open(PatientViewComponent, {
+      data: patient,
+    });
   }
   deletePatient(patient: any) {
     console.log(

@@ -1,1 +1,15 @@
-<p>patient-view works!</p>
+<div class="patient-view">
+  <div class="patient-info">
+    <div class="patient d-flex align-items-center">
+      <div class="patient-id">{{ this.patient._id | slice : -6 }}</div>
+      <div class="vertical-border"></div>
+      <div class="patient-name">{{ this.patient.name }}</div>
+      <div class="vertical-border"></div>
+
+      <div class="patient-age">23</div>
+      <div class="vertical-border"></div>
+
+      <div class="patient-gender">Male</div>
+    </div>
+  </div>
+</div>
